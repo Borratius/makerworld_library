@@ -10,6 +10,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers import device_registry as dr, entity_registry as er
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
@@ -98,6 +99,18 @@ class MakerWorldPrintButton(
             "p2s_compatible": profile.p2s_compatible if profile else False,
             "cloud_print": True,
         }
+
+    @property
+    def device_info(self) -> DeviceInfo:
+        """Attach the print button to the same collection device as its sensors."""
+        data = self.coordinator.data
+        return DeviceInfo(
+            identifiers={(DOMAIN, data.collection_id)},
+            name=data.collection_name,
+            manufacturer="MakerWorld (unofficial API)",
+            model="Collection",
+            configuration_url=f"https://makerworld.com/en/collections/{data.collection_slug}",
+        )
 
     async def async_press(self) -> None:
         """Resolve a fresh URL, map AMS material, and ask ha-bambulab to print."""
