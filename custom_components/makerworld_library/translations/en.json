@@ -1,0 +1,43 @@
+{
+  "title": "MakerWorld Library",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect a MakerWorld collection",
+        "description": "This integration only reads collection and model metadata. Public collections work without a token. Tokens are stored in the Home Assistant config entry and are never exposed as entity attributes or logs.",
+        "data": {
+          "collection_id": "Collection ID",
+          "collection_slug": "Collection path",
+          "printer_device_id": "Bambu Lab printer",
+          "access_token": "Optional Bambu/MakerWorld access token"
+        },
+        "data_description": {
+          "collection_slug": "The final URL segment, for example 35678497-home-prints.",
+          "printer_device_id": "Select the cloud-connected P2S that should receive print jobs.",
+          "access_token": "Leave empty for a public collection. Never enter your password."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Update MakerWorld access",
+        "description": "Enter a replacement token, or leave empty to use public access.",
+        "data": { "access_token": "Access token" }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not read the MakerWorld collection. Check the ID/path and try again.",
+      "invalid_auth": "MakerWorld rejected the access token. Replace it or leave it empty for a public collection."
+    },
+    "abort": {
+      "already_configured": "This MakerWorld collection is already configured.",
+      "reauth_successful": "MakerWorld access was updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "MakerWorld Library options",
+        "data": { "scan_interval": "Refresh interval (minutes)" }
+      }
+    }
+  }
+}

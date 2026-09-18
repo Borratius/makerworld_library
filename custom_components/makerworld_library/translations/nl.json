@@ -1,0 +1,43 @@
+{
+  "title": "MakerWorld Library",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Koppel een MakerWorld-collectie",
+        "description": "Deze integratie leest alleen collectie- en modelmetadata. Openbare collecties werken zonder token. Een token wordt in de Home Assistant-config entry opgeslagen en nooit in entities of logs getoond.",
+        "data": {
+          "collection_id": "Collectie-ID",
+          "collection_slug": "Collectiepad",
+          "printer_device_id": "Bambu Lab-printer",
+          "access_token": "Optioneel Bambu/MakerWorld-toegangstoken"
+        },
+        "data_description": {
+          "collection_slug": "Het laatste deel van de URL, bijvoorbeeld 35678497-home-prints.",
+          "printer_device_id": "Kies de cloud-verbonden P2S die de printopdrachten moet ontvangen.",
+          "access_token": "Laat leeg voor een openbare collectie. Vul hier nooit je wachtwoord in."
+        }
+      },
+      "reauth_confirm": {
+        "title": "MakerWorld-toegang bijwerken",
+        "description": "Vul een vervangend token in, of laat leeg voor openbare toegang.",
+        "data": { "access_token": "Toegangstoken" }
+      }
+    },
+    "error": {
+      "cannot_connect": "De MakerWorld-collectie kon niet worden gelezen. Controleer ID en pad en probeer opnieuw.",
+      "invalid_auth": "MakerWorld heeft het token geweigerd. Vervang het of laat het leeg voor een openbare collectie."
+    },
+    "abort": {
+      "already_configured": "Deze MakerWorld-collectie is al ingesteld.",
+      "reauth_successful": "De MakerWorld-toegang is bijgewerkt."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "MakerWorld Library-opties",
+        "data": { "scan_interval": "Verversingsinterval (minuten)" }
+      }
+    }
+  }
+}
