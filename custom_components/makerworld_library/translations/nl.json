@@ -25,6 +25,7 @@
     },
     "error": {
       "cannot_connect": "De MakerWorld-collectie kon niet worden gelezen. Controleer ID en pad en probeer opnieuw.",
+      "invalid_collection_id": "Het collectie-ID mag alleen cijfers bevatten.",
       "invalid_auth": "MakerWorld heeft het token geweigerd. Vervang het of laat het leeg voor een openbare collectie."
     },
     "abort": {

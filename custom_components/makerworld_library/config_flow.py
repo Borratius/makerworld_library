@@ -92,12 +92,16 @@ class MakerWorldLibraryConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     async def _async_validate(self, values: dict[str, Any]) -> str | None:
+        collection_id = str(values[CONF_COLLECTION_ID]).strip()
+        if not collection_id.isdecimal():
+            return "invalid_collection_id"
+
         client = MakerWorldApiClient(
             async_get_clientsession(self.hass), values.get(CONF_ACCESS_TOKEN)
         )
         try:
             await client.async_validate_collection(
-                str(values[CONF_COLLECTION_ID]).strip(),
+                collection_id,
                 str(values[CONF_COLLECTION_SLUG]).strip(),
             )
         except MakerWorldAuthenticationError:
@@ -140,7 +144,9 @@ def _collection_schema(values: dict[str, Any] | None) -> vol.Schema:
         {
             vol.Required(
                 CONF_COLLECTION_ID, default=values.get(CONF_COLLECTION_ID, DEFAULT_COLLECTION_ID)
-            ): vol.All(str, vol.Match(r"^\d+$")),
+            ): selector.TextSelector(
+                selector.TextSelectorConfig(type=selector.TextSelectorType.TEXT)
+            ),
             vol.Required(
                 CONF_COLLECTION_SLUG,
                 default=values.get(CONF_COLLECTION_SLUG, DEFAULT_COLLECTION_SLUG),

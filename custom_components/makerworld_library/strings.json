@@ -27,6 +27,7 @@
     },
     "error": {
       "cannot_connect": "Could not read the MakerWorld collection. Check the ID/path and try again.",
+      "invalid_collection_id": "The collection ID must contain digits only.",
       "invalid_auth": "MakerWorld rejected the access token. Replace it or leave it empty for a public collection."
     },
     "abort": {
